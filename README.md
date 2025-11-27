@@ -64,3 +64,35 @@ def hello_world():
 
 # ...
 ```
+
+## 5. Create a deployment
+
+```bash
+prefect deploy
+```
+
+This will start an interactive process in the terminal to create a deployment. For the demo I used:
+* `hello_word()` as flow entrypoint
+* Set `demo-deployment` as the name
+* Created `pool-demo`as work pool
+* Picked the `process` infrastructure
+* No remote storage location
+* No schedule
+* Saved configuration in a [prefect.yaml](./prefect.yaml) file
+
+```bash
+prefect deploy -n demo-deployment # deploy using this config
+```
+
+## 6. Worker
+
+To run a deployment we need to start a worker
+```bash
+prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api # set api url
+prefect worker start --pool "pool-demo"
+```
+
+We're now ready to run the deployment!
+```bash
+prefect deployment run 'hello-world/demo-deployment' # schedule a run for this deployment
+```

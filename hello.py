@@ -17,4 +17,5 @@ def hello_world():
     new_msg = msg + str(sub)
     print(new_msg)
 
-hello_world()
+if __name__ == "_main":
+    hello_world()
